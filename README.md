@@ -7,7 +7,7 @@ For anyone that would like some support at using some of the features please con
 
 
 The base concept is the following :
-Instead of generating songs directly in the time domain this AI music generator uses a more guided approach for the AI.
+Instead of generating waveform directly in the time domain (like https://github.com/ibab/tensorflow-wavenet) this AI music generator uses a more guided approach for the AI.
 
 The database (not provided) is a list of FLP projects (FL studio software from Image-Line). After a pre-process done with a C# app, the data are extrected from the FLP projects.
 This application is based on https://github.com/monadgroup/FLParser.
