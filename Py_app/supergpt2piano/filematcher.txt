@@ -1,0 +1,51 @@
+#Function to match track name and music21 stream data
+from mido import MidiFile
+import mido
+def track_name_matcher(midi_path):
+  matched_tracks = {}
+
+  # Open midi with mido
+  mid = MidiFile(midi_path) 
+  tracks = mid.tracks
+  print(tracks)
+
+  # Open midi with music 21
+  mf = music21.midi.MidiFile()
+  mf.open(midi_path)
+  mf.read()
+  mf.close()
+  track_streams =  music21.midi.translate.midiTracksToStreams(mf.tracks).parts
+  print(len(track_streams))
+   
+  for track in tracks:
+      # get elements corresponding to mido tracks (name matcher)
+      pitch_in_track = [];
+      for i in track:
+          if i.type == 'note_on': #######
+              pitch  = i.note #i.bytes()[1]
+              pitch_in_track.append(pitch)
+
+      match_list = []
+      for track_stream in track_streams:
+          # get element corresponding to music 21 (data matcher)
+          pitch_in_track_stream = [];
+         
+          for c in track_stream.recurse().addFilter(chordFilter):
+              # unlike the noteFilter, this line of code is necessary as there are multiple notes in each chord
+              # pitchesInChord is a list of notes at each chord eg. (<music21.pitch.Pitch D5>, <music21.pitch.Pitch F5>)
+              pitchesInChord=c.pitches
+              for p in pitchesInChord:
+                  pitch_in_track_stream.append(p.midi)
+
+          for n in track_stream.recurse().addFilter(noteFilter):
+                pitch_in_track_stream.append(n.pitch.midi)
+
+          match_number = len(set(pitch_in_track) &  set(pitch_in_track_stream))
+          match_list.append(match_number)
+          print(match_list)
+      max_value = max(match_list) 
+
+      best_match_index = match_list.index(max_value) 
+
+      matched_tracks[track.name] = best_match_index
+  return matched_tracks

@@ -1,0 +1,3 @@
+cd C:\Users\fcala\Desktop\Python_projects\MUSIC\Parser
+"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Python 3.7\Python 3.7 (64-bit).lnk" C:\Users\fcala\Desktop\Python_projects\MUSIC\Parser\main1.py
+py C:\Users\fcala\Desktop\Python_projects\MUSIC\Parser\main2.py

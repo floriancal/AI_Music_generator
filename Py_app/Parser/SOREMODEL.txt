@@ -1,0 +1,6 @@
+hat model 
+[0.91666667 0.875      0.91666667 0.95833333 0.7826087 ]
+drums model 
+[0.66153846 0.6875     0.75       0.8125     0.71875   ]
+not very good increase dataset
+
